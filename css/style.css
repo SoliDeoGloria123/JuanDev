@@ -1,0 +1,660 @@
+/* Importación de fuentes */
+@font-face {
+    font-family: 'Tahoma';
+    src: url('../assets/fonts/tahoma.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    /* Colores de Windows XP */
+    --xp-blue: #0055e5;
+    --xp-blue-darker: #0a246a;
+    --xp-blue-gradient-start: #2a8ae2;
+    --xp-blue-gradient-end: #1060d5;
+    --xp-green: #37a000;
+    --xp-red: #c83232;
+    --xp-gray: #ece9d8;
+    --xp-gray-darker: #d4d0c8;
+    --xp-text: #000000;
+    --xp-text-light: #ffffff;
+    --xp-window-border: #2454e5;
+    --xp-button-highlight: #ffd486;
+    
+    /* Tamaños */
+    --taskbar-height: 40px;
+    --icon-size: 48px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tahoma', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    color: var(--xp-text);
+}
+
+/* Pantalla de carga (Boot Screen) */
+#boot-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.boot-content {
+    text-align: center;
+}
+
+.windows-logo {
+    width: 180px;
+    margin-bottom: 20px;
+}
+
+.loading-bar-container {
+    width: 300px;
+    height: 20px;
+    background-color: #000;
+    border: 2px solid #1E57B1;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.loading-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(to right, #236AD5, #4F9BFE);
+    animation: loading 4s linear forwards;
+}
+
+.boot-text {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.boot-copyright {
+    color: white;
+    font-size: 12px;
+}
+
+@keyframes loading {
+    0% { width: 0; }
+    70% { width: 70%; }
+    100% { width: 100%; }
+}
+
+/* Contenedor del terreno 3D */
+#terrain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Por debajo del escritorio y los elementos de Windows XP */
+}
+
+/* Escritorio */
+#desktop {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - var(--taskbar-height));
+    background-image: none; /* Quitar la imagen de fondo original */
+    background-color: transparent; /* Hacer el fondo transparente para ver el terreno 3D */
+    z-index: 1;
+}
+
+/* Iconos de escritorio */
+.desktop-icons {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+.icon:hover {
+    background-color: rgba(49, 106, 197, 0.2);
+    border-color: rgba(49, 106, 197, 0.4);
+}
+
+.icon.selected {
+    background-color: rgba(49, 106, 197, 0.3);
+    border-color: rgba(49, 106, 197, 0.5);
+}
+
+.icon-img {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.my-computer {
+    background-image: url('../assets/images/icons/my-computer.png');
+}
+
+.my-documents {
+    background-image: url('../assets/images/icons/my-documents.png');
+}
+
+.outlook {
+    background-image: url('../assets/images/icons/outlook.png');
+}
+
+.internet-explorer {
+    background-image: url('../assets/images/icons/internet-explorer.png');
+}
+
+.icon-text {
+    color: var(--xp-text-light);
+    text-align: center;
+    text-shadow: 0 0 3px #000, 0 0 3px #000, 0 0 3px #000, 0 0 3px #000;
+    font-size: 12px;
+    margin-top: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    font-weight: bold;
+}
+
+/* Ventanas de Windows XP */
+.window {
+    position: absolute;
+    min-width: 500px;
+    min-height: 300px;
+    background-color: var(--xp-gray);
+    border: 1px solid var(--xp-window-border);
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    display: none;
+    resize: both;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.window.active {
+    z-index: 20;
+}
+
+.window-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 8px;
+    height: 30px;
+    background: linear-gradient(to right, var(--xp-blue-gradient-start), var(--xp-blue-gradient-end));
+    color: var(--xp-text-light);
+    border-radius: 8px 8px 0 0;
+    cursor: move;
+}
+
+.window-title {
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.window-controls {
+    display: flex;
+    gap: 4px;
+}
+
+.control {
+    width: 22px;
+    height: 22px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.minimize {
+    background-color: var(--xp-blue);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" width="12" height="12"><rect fill="white" x="2" y="6" width="8" height="1"/></svg>');
+}
+
+.maximize {
+    background-color: var(--xp-blue);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" width="12" height="12"><rect fill="white" x="2" y="2" width="8" height="8" stroke="white" stroke-width="1" fill-opacity="0"/></svg>');
+}
+
+.close {
+    background-color: var(--xp-red);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" width="12" height="12"><line x1="3" y1="3" x2="9" y2="9" stroke="white" stroke-width="1.2"/><line x1="9" y1="3" x2="3" y2="9" stroke="white" stroke-width="1.2"/></svg>');
+}
+
+.control:hover {
+    filter: brightness(1.1);
+}
+
+.window-body {
+    padding: 10px;
+    height: calc(100% - 30px);
+    overflow: auto;
+}
+
+.window-content {
+    padding: 15px;
+    background-color: white;
+    border: 1px solid var(--xp-gray-darker);
+    min-height: calc(100% - 30px);
+}
+
+/* Barra de tareas */
+#taskbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--taskbar-height);
+    background: linear-gradient(to bottom, #2583ea, #1f69cd);
+    display: flex;
+    align-items: center;
+    padding: 0 2px;
+    z-index: 1000;
+}
+
+#start-button {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 0 10px;
+    margin-left: 5px;
+    background: linear-gradient(to bottom, #3c9f3c, #308430);
+    border: 1px solid #39632f;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#start-button:hover {
+    background: linear-gradient(to bottom, #45b545, #399839);
+}
+
+#start-button:active {
+    background: linear-gradient(to bottom, #308430, #3c9f3c);
+}
+
+#start-button img {
+    height: 20px;
+    margin-right: 5px;
+}
+
+.taskbar-items {
+    flex: 1;
+    display: flex;
+    margin: 0 10px;
+    gap: 5px;
+    overflow-x: auto;
+    max-width: calc(100% - 200px);
+}
+
+.taskbar-item {
+    background: linear-gradient(to bottom, #3892f8, #267ef4);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 3px;
+    max-width: 150px;
+    min-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.taskbar-item:hover, .taskbar-item.active {
+    background: linear-gradient(to bottom, #62abff, #3d91f7);
+}
+
+.system-tray {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    margin-left: auto;
+}
+
+.time {
+    color: white;
+    font-size: 12px;
+}
+
+/* Elementos de Windows XP */
+.xp-button {
+    background: linear-gradient(to bottom, #f6f6f6, #e1e1e1);
+    border: 1px solid #a9a9a9;
+    border-radius: 3px;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.xp-button:hover {
+    background: linear-gradient(to bottom, #f8f8f8, #e9e9e9);
+    border-color: var(--xp-blue);
+}
+
+.xp-button:active {
+    background: linear-gradient(to bottom, #e9e9e9, #f6f6f6);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.xp-input, .xp-textarea {
+    border: 1px solid #7f9db9;
+    padding: 5px;
+    font-size: 12px;
+    background: white;
+    width: 100%;
+}
+
+.xp-input:focus, .xp-textarea:focus {
+    border-color: var(--xp-blue);
+    outline: none;
+}
+
+/* Secciones específicas */
+.skills-container {
+    margin-top: 10px;
+}
+
+.skill {
+    margin-bottom: 8px;
+}
+
+.skill-name {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+.skill-bar {
+    height: 15px;
+    background-color: #e0e0e0;
+    border: 1px solid #c0c0c0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-level {
+    height: 100%;
+    background: linear-gradient(to bottom, var(--xp-blue-gradient-start), var(--xp-blue-gradient-end));
+}
+
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.project-card {
+    border: 1px solid var(--xp-gray-darker);
+    border-radius: 3px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.project-card h3 {
+    color: var(--xp-blue-darker);
+    margin-bottom: 10px;
+}
+
+.project-tech {
+    margin: 10px 0;
+    font-size: 12px;
+    color: #555;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.contact-info {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--xp-gray-darker);
+}
+
+.contact-item {
+    margin-bottom: 10px;
+}
+
+.contact-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* Resume Window Styles */
+.resume-section {
+    margin-bottom: 20px;
+}
+
+.resume-item {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.resume-item:last-child {
+    border-bottom: none;
+}
+
+.resume-item h4 {
+    color: var(--xp-blue-darker);
+    margin-bottom: 5px;
+}
+
+.resume-place {
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.resume-date {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.resume-item ul {
+    padding-left: 20px;
+}
+
+.resume-item li {
+    margin-bottom: 3px;
+}
+
+.resume-download {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Menú de inicio (Start Menu) */
+#start-menu {
+    position: absolute;
+    bottom: var(--taskbar-height);
+    left: 0;
+    width: 380px;
+    height: 480px;
+    display: none; /* Inicialmente oculto */
+    z-index: 1001;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-top-right-radius: 8px;
+    box-shadow: 2px -2px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+#start-menu.visible {
+    display: block !important; /* !important asegura que anule otros estilos */
+}
+
+.start-menu-header {
+    height: 75px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #215dc6 0%, #1e56b8 60%, #1964e5 100%);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #104bac;
+}
+
+.start-menu-header img {
+    width: 48px;
+    height: 48px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+#start-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.start-menu-left {
+    flex: 1;
+    padding: 8px;
+    background-color: white;
+}
+
+.start-menu-right {
+    width: 40%;
+    padding: 8px;
+    background-color: #d3e5fa;
+    border-left: 1px solid #a8c8e4;
+    position: absolute;
+    right: 0;
+    top: 75px;
+    bottom: 0;
+}
+
+.start-menu-item, .start-menu-right-item {
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.start-menu-item:hover, .start-menu-right-item:hover {
+    background-color: rgba(49, 106, 197, 0.2);
+}
+
+.start-menu-item img, .start-menu-right-item img {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+.start-menu-separator {
+    height: 1px;
+    background-color: #d4d0c8;
+    margin: 8px 0;
+}
+
+/* Utilidades */
+.hidden {
+    display: none !important;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .window {
+        min-width: 300px;
+    }
+    
+    .desktop-icons {
+        gap: 10px;
+    }
+    
+    .icon {
+        width: 70px;
+    }
+    
+    .icon-img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .projects-container {
+        grid-template-columns: 1fr;
+    }
+    
+    #start-menu {
+        width: 320px;
+        height: 400px;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.window {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Menú contextual */
+#context-menu {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #a0a0a0;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    padding: 2px;
+    z-index: 1000;
+}
+
+.context-menu-item {
+    padding: 5px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.context-menu-item:hover {
+    background-color: rgba(49, 106, 197, 0.2);
+}
+
+.context-menu-separator {
+    height: 1px;
+    background-color: #d4d0c8;
+    margin: 2px 0;
+}

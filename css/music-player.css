@@ -1,0 +1,67 @@
+/* Estilos para el reproductor de música */
+.music-player {
+    position: absolute;
+    bottom: 50px;
+    right: 20px;
+    background: linear-gradient(to bottom, #274f7d 0%, #4889c9 100%);
+    border: 1px solid #0e3e6e;
+    border-radius: 5px;
+    padding: 5px;
+    z-index: 999;
+    color: white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    user-select: none;
+    min-width: 200px;
+}
+
+.music-handle {
+    padding: 3px 8px;
+    background: #002b5c;
+    cursor: move;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.music-controls {
+    padding: 10px;
+}
+
+.music-title {
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+.music-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.music-button {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-button:hover {
+    transform: scale(1.2);
+}
+
+#music-volume {
+    width: 100px;
+    margin-left: 10px;
+}

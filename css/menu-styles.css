@@ -1,0 +1,81 @@
+/* Estilos corregidos para el menú de inicio */
+#start-menu {
+    position: absolute;
+    bottom: var(--taskbar-height);
+    left: 0;
+    width: 380px;
+    height: 480px;
+    display: none; /* Inicialmente oculto */
+    z-index: 1001;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-top-right-radius: 8px;
+    box-shadow: 2px -2px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    background-color: white; /* Fondo blanco para evitar transparencia */
+}
+
+.start-menu-header {
+    height: 75px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #215dc6 0%, #1e56b8 60%, #1964e5 100%);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #104bac;
+}
+
+.start-menu-header img {
+    width: 48px;
+    height: 48px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+/* Contenedor flex para los paneles lateral izquierdo y derecho */
+.start-menu-panels {
+    display: flex;
+    height: calc(100% - 75px);
+    width: 100%;
+}
+
+.start-menu-left {
+    flex: 60%;
+    padding: 8px;
+    background-color: white;
+    overflow-y: auto;
+}
+
+.start-menu-right {
+    flex: 40%;
+    padding: 8px;
+    background-color: #d3e5fa;
+    border-left: 1px solid #a8c8e4;
+    overflow-y: auto;
+}
+
+.start-menu-item, .start-menu-right-item {
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.start-menu-item:hover, .start-menu-right-item:hover {
+    background-color: rgba(49, 106, 197, 0.2);
+}
+
+.start-menu-item img, .start-menu-right-item img {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+.start-menu-separator {
+    height: 1px;
+    background-color: #d4d0c8;
+    margin: 8px 0;
+}

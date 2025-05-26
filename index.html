@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hola Soy Juan David!</title>
+
+    <!-- CDN de Three.js actualizado y completo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/math/ImprovedNoise.js"></script>
+
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>:)</text></svg>">
+
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/window-styles.css">
+    <link rel="stylesheet" href="css/music-player.css">
+    <link rel="stylesheet" href="css/menu-styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* Estilos en línea como fallback */
+        @font-face {
+            font-family: 'Tahoma';
+            src: url('https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0b.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Fallback font */
+        * {
+            font-family: 'Tahoma', 'Arial', sans-serif !important;
+        }
+
+        /* Eliminar el !important */
+        #start-menu {
+            display: none;
+            /* Quitar el !important */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Pantalla de carga (Boot Screen) -->
+    <div id="boot-screen">
+        <div class="boot-content">
+            <img src="assets/images/windows-xp-logo copy.png" alt="Windows XP" class="windows-logo">
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+            <div class="boot-text">Microsoft Windows XP</div>
+            <div class="boot-copyright">Copyright © Microsoft Corporation</div>
+        </div>
+    </div>
+
+    <!-- Canvas para el terreno 3D -->
+    <div id="terrain-container"></div>
+
+    <!-- Escritorio de Windows XP -->
+    <div id="desktop" class="hidden">
+        <!-- Iconos de escritorio -->
+        <div class="desktop-icons">
+            <div class="icon" id="about-icon">
+                <div class="icon-img my-computer"></div>
+                <div class="icon-text">Sobre Mí</div>
+            </div>
+            <div class="icon" id="projects-icon">
+                <div class="icon-img my-documents"></div>
+                <div class="icon-text">Proyectos</div>
+            </div>
+            <div class="icon" id="contact-icon">
+                <div class="icon-img outlook"></div>
+                <div class="icon-text">Contacto</div>
+            </div>
+            <div class="icon" id="resume-icon">
+                <div class="icon-img internet-explorer"></div>
+                <div class="icon-text">Curriculum</div>
+            </div>
+        </div>
+
+        <!-- Ventanas -->
+        <div class="window" id="about-window">
+            <div class="window-header">
+                <div class="window-title">Sobre Mí</div>
+                <div class="window-controls">
+                    <button class="control minimize"></button>
+                    <button class="control maximize"></button>
+                    <button class="control close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="window-content">
+                    <h2>Desarrollador Full Stack</h2>
+                    <p>¡Hola! Soy Juan David Mahecha Sabogal, desarrollador colombiano especializado en Python y
+                        desarrollo web fullstack con más de 2 años de experiencia participando en diversos proyectos,
+                        incluyendo 6 meses en Adidas Colombia.</p>
+
+                    <div class="skills-section">
+                        <h3>Competencias Básicas</h3>
+                        <div class="skills-container">
+                            <div class="skill">
+                                <span class="skill-name">Python</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <span class="skill-name">Web Scraping (Beautiful Soup, Playwright)</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <span class="skill-name">Programación Funcional</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <span class="skill-name">Bases de Datos (MongoDB)</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <span class="skill-name">HTML, CSS, JS</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <span class="skill-name">Git & Ubuntu</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Idiomas</h3>
+                        <div class="skills-container">
+                            <div class="skill">
+                                <span class="skill-name">Español (nativo)</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <span class="skill-name">Francés</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <span class="skill-name">Inglés</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="window" id="projects-window">
+            <div class="window-header">
+                <div class="window-title">Mis Proyectos</div>
+                <div class="window-controls">
+                    <button class="control minimize"></button>
+                    <button class="control maximize"></button>
+                    <button class="control close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="window-content">
+                    <div class="projects-container">
+                        <div class="project-card">
+                            <h3>Sistema de Gestión</h3>
+                            <p>Aplicación web desarrollada con Django y React para la gestión de recursos empresariales.
+                            </p>
+                            <div class="project-tech">Python • Django • React • PostgreSQL</div>
+                            <button class="xp-button">Ver Proyecto</button>
+                        </div>
+
+                        <div class="project-card">
+                            <h3>API REST Avanzada</h3>
+                            <p>API escalable con autenticación JWT, documentación Swagger y despliegue en Docker.</p>
+                            <div class="project-tech">Python • Flask • MongoDB • Docker</div>
+                            <button class="xp-button">Ver Proyecto</button>
+                        </div>
+
+                        <div class="project-card">
+                            <h3>Visualizador de Datos</h3>
+                            <p>Herramienta para visualizar datos complejos utilizando D3.js y bibliotecas modernas.</p>
+                            <div class="project-tech">JavaScript • D3.js • SVG • Canvas</div>
+                            <button class="xp-button">Ver Proyecto</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="window" id="contact-window">
+            <div class="window-header">
+                <div class="window-title">Contacto</div>
+                <div class="window-controls">
+                    <button class="control minimize"></button>
+                    <button class="control maximize"></button>
+                    <button class="control close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="window-content">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nombre:</label>
+                            <input type="text" id="name" class="xp-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" class="xp-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Mensaje:</label>
+                            <textarea id="message" class="xp-textarea" rows="5" required></textarea>
+                        </div>
+
+                        <button type="submit" class="xp-button">Enviar Mensaje</button>
+                    </form>
+
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-label">Email:</span>
+                            <a href="mailto:juan.juand.dev@gmail.com">juan.juand.dev@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">LinkedIn:</span>
+                            <a href="www.linkedin.com/in/juan-david-mahecha-sabogal"
+                                target="_blank">linkedin.com/in/juan-david</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">GitHub:</span>
+                            <a href="https://github.com/SoliDeoGloria123"
+                                target="_blank">github.com/SoliDeoGloria123</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Teléfono:</span>
+                            <a href="tel:+573115024430">+57 311 502 44 30</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Ubicación:</span>
+                            <span>Bogotá, Colombia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="window" id="resume-window">
+            <div class="window-header">
+                <div class="window-title">Currículum</div>
+                <div class="window-controls">
+                    <button class="control minimize"></button>
+                    <button class="control maximize"></button>
+                    <button class="control close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="window-content">
+                    <h2>Currículum Vitae</h2>
+
+                    <div class="resume-section">
+                        <h3>Experiencia Laboral</h3>
+
+                        <div class="resume-item">
+                            <h4>Trainee Python Developer</h4>
+                            <div class="resume-place">Adidas Colombia, Chapinero / Bogotá</div>
+                            <div class="resume-date">Enero 2024 - Presente</div>
+                            <ul>
+                                <li>Desarrollo de web scrapers para el proyecto Lucy, orientado a obtener datos de más
+                                    de 20 páginas web</li>
+                                <li>Implementación de programación funcional y paradigmas orientados a objetos</li>
+                                <li>Trabajo especializado en Centauro Brasil, una de las plataformas más complejas del
+                                    sistema</li>
+                                <li>Uso de Python con librerías como Beautiful Soup (BS4), Playwright y Returns</li>
+                                <li>Implementación de Git en la terminal de Ubuntu</li>
+                            </ul>
+                        </div>
+
+                        <div class="resume-item">
+                            <h4>Desarrollador Web</h4>
+                            <div class="resume-place">Proyectos Independientes</div>
+                            <div class="resume-date">2022 - 2024</div>
+                            <ul>
+                                <li>Desarrollo de sistemas de reservas de vuelos y hoteles usando HTML, CSS, JavaScript,
+                                    SQL y PHP</li>
+                                <li>Creación de un sistema de comparación de precios entre diferentes supermercados (D1,
+                                    Makro, Carulla)</li>
+                                <li>Implementación de un sistema de gestión para un Seminario Bautista en Colombia</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>Educación</h3>
+
+                        <div class="resume-item">
+                            <h4>Tecnología en Análisis y Desarrollo de Software</h4>
+                            <div class="resume-place">SENA</div>
+                            <div class="resume-date">En curso (3er trimestre)</div>
+                        </div>
+
+                        <div class="resume-item">
+                            <h4>Técnico en Programación de Software</h4>
+                            <div class="resume-place">SENA</div>
+                            <div class="resume-date">Completado</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-download">
+                    <a href="assets/doc/CV_JUAN_DAVID_MAHECHA_SABOGAL (2) (2).pdf" class="xp-button"
+                        onclick="alert('CV completo disponible bajo petición');">Descargar
+                        CV completo (PDF)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menú de inicio (Start Menu) -->
+    <div id="start-menu" style="display: none;">
+        <div class="start-menu-header">
+            <img src="assets/images/icons/user.jpg" alt="User">
+            <span>Juan David</span>
+        </div>
+        <div class="start-menu-left">
+            <div class="start-menu-item" data-window="about-window">
+                <img src="assets/images/icons/my-computer.png" alt="">
+                <span>Sobre Mí</span>
+            </div>
+            <div class="start-menu-item" data-window="projects-window">
+                <img src="assets/images/icons/my-documents.png" alt="">
+                <span>Proyectos</span>
+            </div>
+            <div class="start-menu-item" data-window="contact-window">
+                <img src="assets/images/icons/outlook.png" alt="">
+                <span>Contacto</span>
+            </div>
+            <div class="start-menu-item" data-window="resume-window">
+                <img src="assets/images/icons/internet-explorer.png" alt="">
+                <span>Currículum</span>
+            </div>
+            <div class="start-menu-separator"></div>
+            <div class="start-menu-item" id="shutdown">
+                <img src="assets/images/icons/shutdown.png" alt="">
+                <span>Apagar</span>
+            </div>
+        </div>
+        <div class="start-menu-right">
+            <div class="start-menu-right-item">
+                <img src="assets/images/icons/github.png" alt="">
+                <span>GitHub</span>
+            </div>
+            <div class="start-menu-right-item">
+                <img src="assets/images/icons/linkedin.png" alt="">
+                <span>LinkedIn</span>
+            </div>
+            <div class="start-menu-right-item">
+                <!-- https://www.flaticon.com/free-icon/gmail_5968534?term=gmail&page=1&position=4&origin=tag&related_id=5968534 -->
+                <img src="assets/images/icons/gmail.png" alt="">
+                <span>Email</span>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Barra de tareas de Windows XP -->
+    <div id="taskbar" class="hidden">
+        <button id="start-button">
+            <img src="assets/images/windows-xp-logo copy.png" alt="Start">
+            <span>inicio</span>
+        </button>
+        <div class="taskbar-items">
+            <!-- Aquí se añadirán dinámicamente las ventanas abiertas -->
+        </div>
+        <div class="system-tray">
+            <div class="time" id="system-time">15:45</div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Scripts -->
+    <script src="js/terrain-background.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/tutorial.js"></script>
+    <script src="js/music-player.js"></script>
+    <script src="js/menu-fix.js"></script>
+</body>
+
+</html>

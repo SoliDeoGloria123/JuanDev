@@ -1,0 +1,166 @@
+/* Estilos personalizados para cada ventana */
+
+/* Ventana "Sobre Mí" */
+#about-window {
+    box-shadow: 0 5px 25px rgba(0, 120, 212, 0.5);
+}
+
+#about-window .window-header {
+    background: linear-gradient(to right, #0078d4, #4a9eff);
+}
+
+#about-window .window-content {
+    background: #f5f9ff;
+    border-color: #0078d4;
+}
+
+#about-window .skill-level {
+    background: linear-gradient(to right, #0078d4, #4a9eff);
+}
+
+/* Ventana "Proyectos" */
+#projects-window {
+    box-shadow: 0 5px 25px rgba(126, 49, 180, 0.5);
+}
+
+#projects-window .window-header {
+    background: linear-gradient(to right, #7e31b4, #a44fdf);
+}
+
+#projects-window .window-content {
+    background: #faf5ff;
+    border-color: #7e31b4;
+}
+
+.project-card {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(126, 49, 180, 0.3);
+}
+
+/* Ventana "Contacto" */
+#contact-window {
+    box-shadow: 0 5px 25px rgba(16, 137, 62, 0.5);
+}
+
+#contact-window .window-header {
+    background: linear-gradient(to right, #10893e, #3db064);
+}
+
+#contact-window .window-content {
+    background: #f5fff9;
+    border-color: #10893e;
+}
+
+#contact-window .xp-button {
+    background: linear-gradient(to bottom, #10893e, #3db064);
+    color: white;
+    border-color: #10893e;
+}
+
+#contact-window .xp-button:hover {
+    background: linear-gradient(to bottom, #3db064, #52c87a);
+}
+
+/* Ventana "Currículum" */
+#resume-window {
+    box-shadow: 0 5px 25px rgba(210, 120, 0, 0.5);
+}
+
+#resume-window .window-header {
+    background: linear-gradient(to right, #d27800, #ffb347);
+}
+
+#resume-window .window-content {
+    background: #fffaf0;
+    border-color: #d27800;
+}
+
+.resume-item h4 {
+    color: #d27800;
+}
+
+.resume-download .xp-button {
+    background: linear-gradient(to bottom, #d27800, #ffb347);
+    color: white;
+    border-color: #d27800;
+}
+
+.resume-download .xp-button:hover {
+    background: linear-gradient(to bottom, #ffb347, #ffc677);
+}
+
+/* Ventana de Tutorial */
+.tutorial-window {
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+.tutorial-window .window-header {
+    background: linear-gradient(to right, #004e8c, #0063b1);
+}
+
+.tutorial-content {
+    padding: 20px !important;
+}
+
+.tutorial-section {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tutorial-section:last-child {
+    border-bottom: none;
+}
+
+.tutorial-instruction {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.tutorial-icon {
+    width: 48px;
+    height: 48px;
+    margin-right: 15px;
+    object-fit: contain;
+}
+
+.instruction-text {
+    flex: 1;
+}
+
+.tutorial-list {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+.tutorial-list li {
+    padding: 5px 0;
+    padding-left: 24px;
+    position: relative;
+}
+
+.tutorial-list li:before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-image: url('assets/images/icons/bullet.png');
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 7px;
+}
+
+.tutorial-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}

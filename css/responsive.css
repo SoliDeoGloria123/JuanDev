@@ -1,0 +1,160 @@
+/* Responsive styles for Windows XP Portfolio */
+
+/* Tablets and small laptops */
+@media screen and (max-width: 1024px) {
+
+    /* General adjustments */
+    .window {
+        min-width: 400px;
+    }
+
+    .projects-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #start-menu {
+        width: 320px;
+        height: 450px;
+    }
+}
+
+/* Mobile devices in landscape */
+@media screen and (max-width: 768px) {
+
+    /* Desktop icons */
+    .desktop-icons {
+        gap: 12px;
+    }
+
+    .icon {
+        width: 70px;
+    }
+
+    .icon-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Windows */
+    .window {
+        min-width: 320px;
+    }
+
+    .projects-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Start menu */
+    #start-menu {
+        width: 280px;
+        height: 400px;
+    }
+
+    .start-menu-header {
+        height: 60px;
+        padding: 0 10px;
+    }
+
+    .start-menu-header img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .start-menu-item img,
+    .start-menu-right-item img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Mobile devices in portrait */
+@media screen and (max-width: 480px) {
+
+    /* Desktop */
+    .desktop-icons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        top: 10px;
+        left: 10px;
+        width: calc(100% - 20px);
+    }
+
+    .icon {
+        width: auto;
+    }
+
+    /* Windows */
+    .window {
+        width: 100% !important;
+        height: calc(100% - var(--taskbar-height)) !important;
+        top: 0 !important;
+        left: 0 !important;
+        border-radius: 0;
+    }
+
+    .window-header {
+        border-radius: 0;
+    }
+
+    /* Hide maximize button on mobile */
+    .maximize {
+        display: none;
+    }
+
+    /* Taskbar */
+    #taskbar {
+        height: var(--taskbar-height);
+    }
+
+    #start-button {
+        padding: 0 5px;
+    }
+
+    #start-button span {
+        display: none;
+    }
+
+    .taskbar-items {
+        max-width: calc(100% - 100px);
+    }
+
+    .taskbar-item {
+        min-width: auto;
+        max-width: 100px;
+        padding: 2px 5px;
+    }
+
+    /* Start menu becomes full height on mobile */
+    #start-menu {
+        width: 100%;
+        height: calc(100% - var(--taskbar-height));
+        border-radius: 0;
+        left: 0;
+    }
+
+    /* Skills section */
+    .skills-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Very small devices */
+@media screen and (max-width: 350px) {
+    .desktop-icons {
+        grid-template-columns: 1fr;
+    }
+
+    .icon-text {
+        font-size: 10px;
+    }
+
+    .window-title {
+        max-width: 150px;
+        font-size: 12px;
+    }
+
+    .taskbar-item {
+        max-width: 70px;
+    }
+}
