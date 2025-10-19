@@ -32,7 +32,7 @@ function createTutorial() {
     tutorialMsg.innerHTML = `
         <strong>¡Bienvenido a mi portafolio!</strong>
         <ul style="padding-left: 20px; margin: 5px 0;">
-            <li>Haz <strong>doble clic</strong> en los iconos para abrir</li>
+            <li>Haz <strong>clic</strong> en los iconos para abrir ventanas</li>
             <li>Usa el botón <strong>inicio</strong> para acceder al menú</li>
             <li>Arrastra las ventanas por la barra azul superior</li>
             <li>Da clic derecho en el escritorio para ver más opciones</li>

@@ -5,34 +5,49 @@ document.addEventListener('DOMContentLoaded', function () {
     function setupMusicPlayer() {
         // Crear el reproductor de música
         const musicPlayer = document.createElement('div');
-        musicPlayer.style.position = 'absolute';
-        musicPlayer.style.bottom = '50px';
-        musicPlayer.style.right = '10px';
-        musicPlayer.style.backgroundColor = '#2574b5';
-        musicPlayer.style.border = '1px solid #0e3e6e';
-        musicPlayer.style.borderRadius = '3px';
-        musicPlayer.style.padding = '5px';
-        musicPlayer.style.color = 'white';
-        musicPlayer.style.fontFamily = 'Tahoma, sans-serif';
-        musicPlayer.style.fontSize = '12px';
-        musicPlayer.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+        musicPlayer.style.position = 'fixed';
+        musicPlayer.style.bottom = '60px';
+        musicPlayer.style.right = '20px';
         musicPlayer.style.zIndex = '999';
-        musicPlayer.style.width = '220px';
+        musicPlayer.style.transition = 'all 0.3s ease';
         musicPlayer.id = 'music-player';
         musicPlayer.className = 'music-player';
         musicPlayer.innerHTML = `
-            <div class="music-handle">♫</div>
-            <div class="music-controls">
-                <div class="music-title">Susurros en la lluvia</div>
-                <h6 class="music-subtitle" style="text-align:center;">Autor: Juan David</h6>
-                <audio id="background-music" loop>
-                    <source src="assets/sounds/Whispers in the Rain.mp3" type="audio/mp3">
-                </audio>
-                <div class="music-buttons">
-                    <button id="music-play" class="music-button">▶️</button>
-                    <button id="music-pause" class="music-button" style="display:none;">⏸️</button>
-                    <button id="music-skip" class="music-button">⏭️</button>
-                    <input type="range" id="music-volume" min="0" max="1" step="0.1" value="0.5">
+            <!-- Modo minimizado (bolita) -->
+            <div class="music-minimized" id="music-minimized" style="display: none;">
+                <div class="music-mini-icon">♫</div>
+            </div>
+            
+            <!-- Modo expandido (card) -->
+            <div class="music-card" id="music-card">
+                <div class="music-card-header">
+                    <div class="music-card-title">
+                        <span class="music-icon">🎵</span>
+                        <span>Reproductor</span>
+                    </div>
+                    <button class="music-minimize-btn" id="music-minimize">─</button>
+                </div>
+                
+                <div class="music-card-content">
+                    <div class="music-info">
+                        <div class="music-title">Susurros en la lluvia</div>
+                        <div class="music-subtitle">Autor: Juan David</div>
+                    </div>
+                    
+                    <audio id="background-music" loop>
+                        <source src="assets/sounds/Whispers in the Rain.mp3" type="audio/mp3">
+                    </audio>
+                    
+                    <div class="music-controls">
+                        <button id="music-play" class="music-control-btn">▶️</button>
+                        <button id="music-pause" class="music-control-btn" style="display:none;">⏸️</button>
+                        <button id="music-skip" class="music-control-btn">⏭️</button>
+                    </div>
+                    
+                    <div class="music-volume-container">
+                        <span class="volume-icon">🔊</span>
+                        <input type="range" id="music-volume" min="0" max="1" step="0.1" value="0.5" class="music-volume-slider">
+                    </div>
                 </div>
             </div>
         `;
@@ -64,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ];
 
         let currentTrack = 0;
+        let isMinimized = false;
         const audio = document.getElementById('background-music');
         const playButton = document.getElementById('music-play');
         const pauseButton = document.getElementById('music-pause');
@@ -71,6 +87,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const volumeControl = document.getElementById('music-volume');
         const musicTitle = document.querySelector('.music-title');
         const musicAuthor = document.querySelector('.music-subtitle');
+        const minimizeButton = document.getElementById('music-minimize');
+        const musicCard = document.getElementById('music-card');
+        const musicMinimized = document.getElementById('music-minimized');
 
         // Función para cargar y reproducir una pista
         function loadTrack(trackIndex) {
@@ -79,6 +98,22 @@ document.addEventListener('DOMContentLoaded', function () {
             musicAuthor.textContent = playlist[trackIndex].author;
             audio.load();
         }
+
+        // Función para minimizar/expandir el reproductor
+        function toggleMinimize() {
+            isMinimized = !isMinimized;
+            if (isMinimized) {
+                musicCard.style.display = 'none';
+                musicMinimized.style.display = 'flex';
+            } else {
+                musicCard.style.display = 'block';
+                musicMinimized.style.display = 'none';
+            }
+        }
+
+        // Event listeners para minimizar/expandir
+        minimizeButton.addEventListener('click', toggleMinimize);
+        musicMinimized.addEventListener('click', toggleMinimize);
 
         // Reproducir música
         playButton.addEventListener('click', function () {
@@ -106,17 +141,59 @@ document.addEventListener('DOMContentLoaded', function () {
         // Control de volumen
         volumeControl.addEventListener('input', function () {
             audio.volume = volumeControl.value;
+            
+            // Sincronizar con el botón global de sonido
+            const globalSoundButton = document.getElementById('sound-toggle');
+            if (globalSoundButton && window.soundManager) {
+                if (volumeControl.value == 0 && window.soundManager.soundEnabled) {
+                    // Si se pone el volumen a 0, desactivar sonidos globalmente
+                    window.soundManager.toggle();
+                    globalSoundButton.textContent = '🔇';
+                    globalSoundButton.title = 'Activar sonidos';
+                    globalSoundButton.classList.add('muted');
+                } else if (volumeControl.value > 0 && !window.soundManager.soundEnabled) {
+                    // Si se sube el volumen, activar sonidos globalmente
+                    window.soundManager.toggle();
+                    globalSoundButton.textContent = '🔊';
+                    globalSoundButton.title = 'Desactivar sonidos';
+                    globalSoundButton.classList.remove('muted');
+                }
+            }
         });
 
-        // Hacer el reproductor arrastrable
-        const handle = document.querySelector('.music-handle');
+        // Configurar volumen inicial
+        audio.volume = 0.5;
+        volumeControl.value = 0.5;
+        
+        // Cargar la primera pista
+        loadTrack(currentTrack);
+
+        // Asegurar que el audio esté listo
+        audio.addEventListener('loadeddata', function() {
+            console.log('Audio cargado y listo');
+        });
+
+        // Hacer el reproductor arrastrable (solo cuando está expandido)
         let isDragging = false;
         let offsetX, offsetY;
 
-        handle.addEventListener('mousedown', function (e) {
+        musicCard.addEventListener('mousedown', function (e) {
+            if (e.target === minimizeButton) return; // No arrastrar si se hace clic en minimizar
             isDragging = true;
             offsetX = e.clientX - musicPlayer.getBoundingClientRect().left;
             offsetY = e.clientY - musicPlayer.getBoundingClientRect().top;
+            musicPlayer.style.cursor = 'grabbing';
+
+            document.addEventListener('mousemove', movePlayer);
+            document.addEventListener('mouseup', stopMoving);
+        });
+
+        musicMinimized.addEventListener('mousedown', function (e) {
+            e.stopPropagation(); // Evitar que se expanda cuando se arrastra
+            isDragging = true;
+            offsetX = e.clientX - musicPlayer.getBoundingClientRect().left;
+            offsetY = e.clientY - musicPlayer.getBoundingClientRect().top;
+            musicPlayer.style.cursor = 'grabbing';
 
             document.addEventListener('mousemove', movePlayer);
             document.addEventListener('mouseup', stopMoving);
@@ -126,29 +203,19 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isDragging) {
                 musicPlayer.style.left = (e.clientX - offsetX) + 'px';
                 musicPlayer.style.top = (e.clientY - offsetY) + 'px';
+                musicPlayer.style.right = 'auto';
+                musicPlayer.style.bottom = 'auto';
             }
         }
 
         function stopMoving() {
             isDragging = false;
+            musicPlayer.style.cursor = 'default';
             document.removeEventListener('mousemove', movePlayer);
             document.removeEventListener('mouseup', stopMoving);
         }
 
-        // Cargar la primera pista
-        loadTrack(currentTrack);
-
         // Reproducir automáticamente al inicio (opcional)
         // audio.play();
-
-        // Estado colapsado/expandido
-        handle.addEventListener('dblclick', function () {
-            const controls = document.querySelector('.music-controls');
-            if (controls.style.display === 'none') {
-                controls.style.display = 'block';
-            } else {
-                controls.style.display = 'none';
-            }
-        });
     }
 });

@@ -48,6 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.classList.add('active');
                 window.style.zIndex = zIndexCounter++;
                 
+                // Track window opening for achievements
+                if (window.achievementSystem) {
+                    window.achievementSystem.trackWindowOpen(window.id);
+                }
+                
                 // Actualizar barra de tareas
                 updateTaskbar();
             }
@@ -107,23 +112,39 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         maxBtn.addEventListener('click', () => {
-            if (window.style.width === '100%') {
+            console.log('Maximize button clicked');
+            
+            if (window.style.width === '100%' || window.style.width === '100vw') {
                 // Restaurar
+                console.log('Restoring window');
                 window.style.width = window.dataset.prevWidth || '600px';
                 window.style.height = window.dataset.prevHeight || '400px';
                 window.style.top = window.dataset.prevTop || '50px';
                 window.style.left = window.dataset.prevLeft || '50px';
+                window.style.maxWidth = '';
+                window.style.maxHeight = '';
             } else {
                 // Maximizar
-                window.dataset.prevWidth = window.style.width;
-                window.dataset.prevHeight = window.style.height;
-                window.dataset.prevTop = window.style.top;
-                window.dataset.prevLeft = window.style.left;
+                console.log('Maximizing window');
+                window.dataset.prevWidth = window.style.width || '600px';
+                window.dataset.prevHeight = window.style.height || '400px';
+                window.dataset.prevTop = window.style.top || '50px';
+                window.dataset.prevLeft = window.style.left || '50px';
                 
-                window.style.width = '100%';
-                window.style.height = `calc(100% - var(--taskbar-height))`;
-                window.style.top = '0';
-                window.style.left = '0';
+                // Check if mobile
+                if (window.innerWidth <= 480) {
+                    window.style.width = '100vw';
+                    window.style.height = 'calc(100vh - 60px)';
+                    window.style.top = '0';
+                    window.style.left = '0';
+                    window.style.maxWidth = '100vw';
+                    window.style.maxHeight = 'calc(100vh - 60px)';
+                } else {
+                    window.style.width = '100%';
+                    window.style.height = 'calc(100vh - 60px)';
+                    window.style.top = '0';
+                    window.style.left = '0';
+                }
             }
         });
     });
@@ -131,6 +152,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar los iconos del escritorio
     icons.forEach(icon => {
         icon.addEventListener('click', (e) => {
+            // Hide the hint after first interaction
+            const hint = document.querySelector('.desktop-hint');
+            if (hint) {
+                hint.style.display = 'none';
+            }
+            
             // Cerrar el menú de inicio si está abierto
             if (isStartMenuOpen) {
                 startMenu.style.display = 'none';
@@ -140,19 +167,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // Seleccionar solo este icono
             icons.forEach(i => i.classList.remove('selected'));
             icon.classList.add('selected');
-        });
-        
-        icon.addEventListener('dblclick', (e) => {
+            
+            // Abrir ventana inmediatamente con single click
             const windowId = icon.id.replace('-icon', '-window');
             const window = document.getElementById(windowId);
             
             if (window) {
-                // Reproducir sonido de doble clic
-                const clickSound = new Audio('https://www.winhistory.de/more/winstart/down/xpclick.mp3');
-                clickSound.volume = 0.3;
-                clickSound.play().catch(error => {
-                    console.log("No se pudo reproducir el sonido:", error);
-                });
+                // Reproducir sonido de clic
+                if (window.soundManager) {
+                    window.soundManager.play('click');
+                }
                 
                 // Posición aleatoria para las ventanas cuando se abren
                 if (!window.style.top) {
@@ -163,21 +187,32 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     window.style.top = `${Math.max(20, randomY)}px`;
                     window.style.left = `${Math.max(20, randomX)}px`;
-                    window.style.width = '600px';
-                    window.style.height = '400px';
                 }
                 
+                // Mostrar la ventana
                 window.style.display = 'block';
-                window.style.zIndex = zIndexCounter++;
                 
-                if (activeWindow) {
+                // Hacer que la ventana sea activa
+                if (activeWindow && activeWindow !== window) {
                     activeWindow.classList.remove('active');
                 }
                 activeWindow = window;
                 window.classList.add('active');
+                window.style.zIndex = zIndexCounter++;
                 
+                // Track window opening for achievements
+                if (window.achievementSystem) {
+                    window.achievementSystem.trackWindowOpen(window.id);
+                }
+                
+                // Actualizar barra de tareas
                 updateTaskbar();
             }
+        });
+        
+        // Mantener el doble click para compatibilidad pero sin funcionalidad duplicada
+        icon.addEventListener('dblclick', (e) => {
+            e.preventDefault(); // Evitar que se ejecute dos veces
         });
     });
     
@@ -328,6 +363,61 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Funcionalidad para los enlaces del menú Start
+    const githubLink = document.getElementById('github-link');
+    const linkedinLink = document.getElementById('linkedin-link');
+    const emailLink = document.getElementById('email-link');
+    
+    if (githubLink) {
+        githubLink.addEventListener('click', function(e) {
+            e.stopPropagation();
+            window.open('https://github.com/SoliDeoGloria123', '_blank');
+            
+            // Cerrar el menú de inicio
+            if (startMenu) {
+                startMenu.style.display = 'none';
+                isStartMenuOpen = false;
+            }
+        });
+    }
+    
+    if (linkedinLink) {
+        linkedinLink.addEventListener('click', function(e) {
+            e.stopPropagation();
+            window.open('https://www.linkedin.com/in/juan-david-mahecha-sabogal', '_blank');
+            
+            // Cerrar el menú de inicio
+            if (startMenu) {
+                startMenu.style.display = 'none';
+                isStartMenuOpen = false;
+            }
+        });
+    }
+    
+    if (emailLink) {
+        emailLink.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const contactWindow = document.getElementById('contacto');
+            if (contactWindow) {
+                contactWindow.style.display = 'block';
+                contactWindow.style.zIndex = zIndexCounter++;
+                
+                if (activeWindow) {
+                    activeWindow.classList.remove('active');
+                }
+                activeWindow = contactWindow;
+                contactWindow.classList.add('active');
+                updateTaskbar();
+            }
+            
+            // Cerrar el menú de inicio
+            if (startMenu) {
+                startMenu.style.display = 'none';
+                isStartMenuOpen = false;
+            }
+        });
+    }
+    
     // Cerrar el menú al hacer clic en cualquier lugar fuera
     document.addEventListener('click', function(e) {
         if (isStartMenuOpen && 
@@ -443,4 +533,37 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
+    // Manejo de descarga del CV
+    const downloadCVBtn = document.getElementById('download-cv-btn');
+    if (downloadCVBtn) {
+        downloadCVBtn.addEventListener('click', function(e) {
+            console.log('📄 Iniciando descarga del CV...');
+            
+            // Track the CV download achievement
+            if (window.achievementSystem) {
+                window.achievementSystem.trackCVDownload();
+            }
+            
+            // Play success sound
+            if (window.soundManager) {
+                window.soundManager.play('success');
+            }
+            
+            // Visual feedback
+            const originalText = this.textContent;
+            this.textContent = '⬇️ Descargando...';
+            this.style.background = '#37a000';
+            
+            setTimeout(() => {
+                this.textContent = '✅ Descargado!';
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.background = '';
+                }, 2000);
+            }, 500);
+            
+            console.log('✅ CV descargado exitosamente');
+        });
+    }
 });

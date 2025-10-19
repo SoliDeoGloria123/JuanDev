@@ -1,5 +1,26 @@
 {
+  "name": "juan-david-portfolio",
+  "version": "1.0.0",
+  "description": "Windows XP themed portfolio showcasing Juan David Mahecha's development skills",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -s . -l 8080",
+    "build": "echo 'Static site - no build required'",
+    "dev": "npx serve -s . -l 3000"
+  },
+  "keywords": ["portfolio", "windows-xp", "frontend", "javascript", "html", "css"],
+  "author": "Juan David Mahecha Sabogal",
+  "license": "MIT",
   "dependencies": {
-    "three": "^0.176.0"
-  }
+    "three": "^0.176.0",
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SoliDeoGloria123/JuanDev.git"
+  },
+  "homepage": "https://github.com/SoliDeoGloria123/JuanDev"
 }

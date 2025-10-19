@@ -6,6 +6,36 @@
     font-style: normal;
 }
 
+.desktop-icons {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.desktop-hint {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    backdrop-filter: blur(10px);
+    animation: fadeInOut 6s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    20%, 80% { opacity: 1; }
+}
+
+.desktop-hint p {
+    margin: 0;
+    text-align: center;
+}
+
 :root {
     /* Colores de Windows XP */
     --xp-blue: #0055e5;
@@ -130,19 +160,28 @@ body {
     align-items: center;
     width: 80px;
     cursor: pointer;
-    padding: 5px;
+    padding: 8px;
     border: 1px solid transparent;
-    border-radius: 3px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    user-select: none;
 }
 
 .icon:hover {
     background-color: rgba(49, 106, 197, 0.2);
     border-color: rgba(49, 106, 197, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(49, 106, 197, 0.3);
 }
 
 .icon.selected {
     background-color: rgba(49, 106, 197, 0.3);
-    border-color: rgba(49, 106, 197, 0.5);
+    border-color: rgba(49, 106, 197, 0.6);
+    transform: scale(1.02);
+}
+
+.icon:active {
+    transform: scale(0.98);
 }
 
 .icon-img {
@@ -167,6 +206,36 @@ body {
 
 .internet-explorer {
     background-image: url('../assets/images/icons/internet-explorer.png');
+}
+
+.games {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.games::before {
+    content: "🎮";
+}
+
+.photos {
+    background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    box-shadow: 0 2px 8px rgba(255, 234, 167, 0.3);
+}
+
+.photos::before {
+    content: "📸";
 }
 
 .icon-text {
@@ -259,13 +328,17 @@ body {
     padding: 10px;
     height: calc(100% - 30px);
     overflow: auto;
+    position: relative;
 }
 
 .window-content {
     padding: 15px;
     background-color: white;
     border: 1px solid var(--xp-gray-darker);
-    min-height: calc(100% - 30px);
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100vh - 150px);
 }
 
 /* Barra de tareas */
@@ -368,16 +441,21 @@ body {
 }
 
 .xp-input, .xp-textarea {
-    border: 1px solid #7f9db9;
-    padding: 5px;
-    font-size: 12px;
-    background: white;
     width: 100%;
-}
-
-.xp-input:focus, .xp-textarea:focus {
-    border-color: var(--xp-blue);
-    outline: none;
+    padding: 8px 12px;
+    border: 2px inset #e0e0e0;
+    border-radius: 0;
+    font-family: 'Tahoma', Arial, sans-serif;
+    font-size: 11px;
+    background-color: white;
+    color: black;
+    pointer-events: auto;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    touch-action: manipulation;
+    z-index: 1;
+    position: relative;
 }
 
 /* Secciones específicas */
@@ -498,8 +576,35 @@ body {
 }
 
 .resume-download {
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+}
+
+.resume-download a {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.resume-download a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+}
+
+.resume-download a:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
 }
 
 /* Menú de inicio (Start Menu) */

@@ -1,0 +1,10 @@
+{
+  "service_id": "service_7y78bph",
+  "template_id": "plantilla_8nnob5g",
+  "user_id": "czyK7mQ9hiDQhR0I",
+  "template_params": {
+    "from_name": "Prueba Terminal",
+    "from_email": "test@example.com",
+    "message": "Este es un mensaje de prueba enviado desde la terminal para verificar que el formulario de contacto funciona correctamente con EmailJS."
+  }
+}

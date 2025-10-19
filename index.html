@@ -4,12 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hola Soy Juan David!</title>
+    <title>Juan David Mahecha - Desarrollador Frontend | Portfolio Windows XP</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Portfolio interactivo de Juan David Mahecha, desarrollador frontend especializado en JavaScript, HTML5, CSS3 y Three.js. Experiencia nostálgica de Windows XP con juegos y proyectos.">
+    <meta name="keywords" content="Juan David Mahecha, desarrollador frontend, JavaScript, HTML5, CSS3, Three.js, portfolio, Windows XP, juegos HTML5">
+    <meta name="author" content="Juan David Mahecha Sabogal">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Spanish">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Juan David Mahecha - Portfolio Windows XP">
+    <meta property="og:description" content="Portfolio interactivo con diseño nostálgico de Windows XP. Juegos, proyectos y habilidades de desarrollo frontend.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://juan-david-portfolio.onrender.com">
+    <meta property="og:image" content="https://juan-david-portfolio.onrender.com/assets/images/windows-xp-logo%20copy.png">
+    <meta property="og:site_name" content="Juan David Mahecha Portfolio">
+    <meta property="og:locale" content="es_ES">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Juan David Mahecha - Portfolio Windows XP">
+    <meta name="twitter:description" content="Portfolio interactivo con diseño nostálgico de Windows XP. Juegos, proyectos y habilidades de desarrollo frontend.">
+    <meta name="twitter:image" content="https://juan-david-portfolio.onrender.com/assets/images/windows-xp-logo%20copy.png">
+    
+    <!-- Theme and App Meta Tags -->
+    <meta name="theme-color" content="#0055e5">
+    <meta name="application-name" content="Juan David Portfolio">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Juan David Portfolio">
 
     <!-- CDN de Three.js actualizado y completo -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/math/ImprovedNoise.js"></script>
+    
+    <!-- EmailJS for contact form -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <!-- Favicon -->
     <link rel="icon"
@@ -20,6 +53,7 @@
     <link rel="stylesheet" href="css/window-styles.css">
     <link rel="stylesheet" href="css/music-player.css">
     <link rel="stylesheet" href="css/menu-styles.css">
+    <link rel="stylesheet" href="css/games-and-photos.css">
     <link rel="stylesheet" href="css/responsive.css">
 
     <style>
@@ -64,6 +98,9 @@
     <div id="desktop" class="hidden">
         <!-- Iconos de escritorio -->
         <div class="desktop-icons">
+            <div class="desktop-hint">
+                <p>💡 Haz click en los iconos para abrir las ventanas</p>
+            </div>
             <div class="icon" id="about-icon">
                 <div class="icon-img my-computer"></div>
                 <div class="icon-text">Sobre Mí</div>
@@ -71,6 +108,14 @@
             <div class="icon" id="projects-icon">
                 <div class="icon-img my-documents"></div>
                 <div class="icon-text">Proyectos</div>
+            </div>
+            <div class="icon" id="games-icon">
+                <div class="icon-img games"></div>
+                <div class="icon-text">Juegos</div>
+            </div>
+            <div class="icon" id="photos-icon">
+                <div class="icon-img photos"></div>
+                <div class="icon-text">Fotos</div>
             </div>
             <div class="icon" id="contact-icon">
                 <div class="icon-img outlook"></div>
@@ -94,13 +139,36 @@
             </div>
             <div class="window-body">
                 <div class="window-content">
-                    <h2>Desarrollador Full Stack</h2>
-                    <p>¡Hola! Soy Juan David Mahecha Sabogal, desarrollador colombiano especializado en Python y
-                        desarrollo web fullstack con más de 2 años de experiencia participando en diversos proyectos,
-                        incluyendo 6 meses en Adidas Colombia.</p>
+                    <div class="profile-header">
+                        <h2>👨‍💻 Desarrollador Full Stack</h2>
+                        <p class="profile-intro">¡Hola! Soy <strong>Juan David Mahecha Sabogal</strong>, desarrollador colombiano especializado en <strong>Python y desarrollo web fullstack</strong> con aproximadamente 2 años de experiencia como Software Developer, incluyendo <strong>6 meses como Trainee Developer en Adidas Colombia</strong> y actualmente como <strong>Estudiante en un tecnologo en Análisis y Desarrollo de Software</strong> en Bogotá.</p>
+                        
+                        <div class="experience-highlight">
+                            <h3>🚀 Experiencia Destacada</h3>
+                            <div class="experience-card">
+                                <h4>Adidas Ltda, Colombia (enero 2024 - julio 2024)</h4>
+                                <p><strong>Trainee for software programming technician</strong></p>
+                                <ul>
+                                    <li>Desarrollé web scrapers desde cero para aprender la estructura del proyecto Lucy, empezando con programación en Python</li>
+                                    <li>Utilicé herramientas para la extracción de datos de más de 200 páginas web</li>
+                                    <li>Implementé técnicas de Tipado en los Socios y manejo de errores y creación de excepciones</li>
+                                    <li>Empleé Tipado en los Socios para diseñar una base de datos sólida a través de crear, Lucía, un web scraper capaz de rapar información e imprimirla por consola</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="experience-card">
+                                <h4>Servicio Nacional de Aprendizaje, Colombia (abril 2023 - julio 2024)</h4>
+                                <p><strong>Etapa Lectiva, Desarrollo de un software de sistema de vuelos y hoteles</strong></p>
+                                <ul>
+                                    <li>Aprendí los lenguajes como C# .net MVC sin olvidar, HTML, CSS, JS para Front End</li>
+                                    <li>Desarrollé habilidades blandas y ciclo de vida de un Software</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="skills-section">
-                        <h3>Competencias Básicas</h3>
+                        <h3>💻 Competencias Técnicas</h3>
                         <div class="skills-container">
                             <div class="skill">
                                 <span class="skill-name">Python</span>
@@ -115,19 +183,19 @@
                                 </div>
                             </div>
                             <div class="skill">
-                                <span class="skill-name">Programación Funcional</span>
+                                <span class="skill-name">C# .NET MVC</span>
                                 <div class="skill-bar">
                                     <div class="skill-level" style="width: 85%"></div>
                                 </div>
                             </div>
                             <div class="skill">
-                                <span class="skill-name">Bases de Datos (MongoDB)</span>
+                                <span class="skill-name">HTML, CSS, JavaScript</span>
                                 <div class="skill-bar">
                                     <div class="skill-level" style="width: 85%"></div>
                                 </div>
                             </div>
                             <div class="skill">
-                                <span class="skill-name">HTML, CSS, JS</span>
+                                <span class="skill-name">Bases de Datos (SQL, MongoDB)</span>
                                 <div class="skill-bar">
                                     <div class="skill-level" style="width: 80%"></div>
                                 </div>
@@ -135,30 +203,58 @@
                             <div class="skill">
                                 <span class="skill-name">Git & Ubuntu</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 75%"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h3>Idiomas</h3>
-                        <div class="skills-container">
-                            <div class="skill">
-                                <span class="skill-name">Español (nativo)</span>
-                                <div class="skill-bar">
-                                    <div class="skill-level" style="width: 100%"></div>
+                                    <div class="skill-level" style="width: 80%"></div>
                                 </div>
                             </div>
                             <div class="skill">
-                                <span class="skill-name">Francés</span>
+                                <span class="skill-name">Programación Orientada a Objetos</span>
                                 <div class="skill-bar">
                                     <div class="skill-level" style="width: 85%"></div>
                                 </div>
                             </div>
                             <div class="skill">
-                                <span class="skill-name">Inglés</span>
+                                <span class="skill-name">Análisis y Desarrollo de Software</span>
                                 <div class="skill-bar">
-                                    <div class="skill-level" style="width: 70%"></div>
+                                    <div class="skill-level" style="width: 85%"></div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <h3>🌐 Idiomas</h3>
+                        <div class="skills-container">
+                            <div class="skill">
+                                <span class="skill-name">Español (Nativo)</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <span class="skill-name">Inglés (Nivel A1)</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div class="skill">
+                                <span class="skill-name">Francés (Nivel A1)</span>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3>🎓 Educación</h3>
+                        <div class="education-section">
+                            <div class="education-item">
+                                <h4>Servicio Nacional de Aprendizaje (SENA)</h4>
+                                <p><strong>Tecnólogo en Análisis y desarrollo de Software</strong> - Oct 2024 - Ago 2025</p>
+                            </div>
+                            <div class="education-item">
+                                <h4>Servicio Nacional de Aprendizaje (SENA)</h4>
+                                <p><strong>Técnico en Programación de Software</strong> - Abr 2023 - Jul 2024</p>
+                            </div>
+                            <div class="education-item">
+                                <h4>Universidad Sergio Arboleda (Beca Atenea)</h4>
+                                <p><strong>Fundamentos en programación, Python y Java</strong> - Mar 2023</p>
                             </div>
                         </div>
                     </div>
@@ -177,27 +273,269 @@
             </div>
             <div class="window-body">
                 <div class="window-content">
+                    <h2>🚀 Mis Proyectos Destacados</h2>
                     <div class="projects-container">
+                        <div class="project-card featured">
+                            <div class="project-badge">⭐ Proyecto Destacado</div>
+                            <h3>🏢 Web Scraper Lucy - Adidas Colombia</h3>
+                            <p>Desarrollé un web scraper avanzado desde cero para extraer datos de más de 200 páginas web. Implementé manejo de errores robusto, tipado de datos y técnicas de programación funcional para optimizar el rendimiento.</p>
+                            <div class="project-achievements">
+                                <span class="achievement">📊 +200 páginas web</span>
+                                <span class="achievement">⚡ Optimización de rendimiento</span>
+                                <span class="achievement">🛡️ Manejo de errores</span>
+                            </div>
+                            <div class="project-tech">Python • Beautiful Soup • Playwright • Tipado • POO</div>
+                            <button class="xp-button">Ver Detalles</button>
+                        </div>
+
                         <div class="project-card">
-                            <h3>Sistema de Gestión</h3>
-                            <p>Aplicación web desarrollada con Django y React para la gestión de recursos empresariales.
-                            </p>
-                            <div class="project-tech">Python • Django • React • PostgreSQL</div>
+                            <h3>🏨 Sistema de Vuelos y Hoteles</h3>
+                            <p>Sistema completo de reservas desarrollado durante mi formación en SENA. Incluye gestión de usuarios, búsqueda avanzada y proceso de reservas con arquitectura MVC.</p>
+                            <div class="project-achievements">
+                                <span class="achievement">🎯 Arquitectura MVC</span>
+                                <span class="achievement">👥 Gestión de usuarios</span>
+                                <span class="achievement">🔍 Búsqueda avanzada</span>
+                            </div>
+                            <div class="project-tech">C# • .NET MVC • SQL Server • HTML • CSS • JavaScript</div>
                             <button class="xp-button">Ver Proyecto</button>
                         </div>
 
                         <div class="project-card">
-                            <h3>API REST Avanzada</h3>
-                            <p>API escalable con autenticación JWT, documentación Swagger y despliegue en Docker.</p>
-                            <div class="project-tech">Python • Flask • MongoDB • Docker</div>
-                            <button class="xp-button">Ver Proyecto</button>
+                            <h3>🌐 Portafolio Interactivo (Este sitio)</h3>
+                            <p>Portafolio personal con tema retro de Windows XP, featuring terreno 3D con Three.js, diseño completamente responsivo y elementos interactivos gamificados.</p>
+                            <div class="project-achievements">
+                                <span class="achievement">🎮 Interfaz gamificada</span>
+                                <span class="achievement">📱 100% Responsivo</span>
+                                <span class="achievement">🎨 Diseño creativo</span>
+                            </div>
+                            <div class="project-tech">HTML5 • CSS3 • JavaScript • Three.js • Responsive Design</div>
+                            <button class="xp-button">Ver Código</button>
                         </div>
 
                         <div class="project-card">
-                            <h3>Visualizador de Datos</h3>
-                            <p>Herramienta para visualizar datos complejos utilizando D3.js y bibliotecas modernas.</p>
-                            <div class="project-tech">JavaScript • D3.js • SVG • Canvas</div>
-                            <button class="xp-button">Ver Proyecto</button>
+                            <h3>🐍 Herramientas de Automatización Python</h3>
+                            <p>Colección de scripts de automatización para tareas cotidianas: manipulación de archivos, procesamiento de datos y automatización de workflows.</p>
+                            <div class="project-achievements">
+                                <span class="achievement">⚙️ Automatización</span>
+                                <span class="achievement">📁 Gestión de archivos</span>
+                                <span class="achievement">🔄 Workflows</span>
+                            </div>
+                            <div class="project-tech">Python • Pandas • OS • JSON • CSV</div>
+                            <button class="xp-button">Ver Scripts</button>
+                        </div>
+
+                        <div class="project-card">
+                            <h3>🎓 Proyectos de Aprendizaje</h3>
+                            <p>Diversos proyectos desarrollados durante mi formación: calculadoras, juegos simples, aplicaciones de consola y ejercicios de lógica de programación.</p>
+                            <div class="project-achievements">
+                                <span class="achievement">🧮 Algoritmos</span>
+                                <span class="achievement">🎮 Mini-juegos</span>
+                                <span class="achievement">💡 Lógica</span>
+                            </div>
+                            <div class="project-tech">Python • Java • C# • Algoritmos • Estructuras de Datos</div>
+                            <button class="xp-button">Ver Colección</button>
+                        </div>
+
+                        <div class="project-card coming-soon">
+                            <h3>🚀 Próximos Proyectos</h3>
+                            <p>Actualmente trabajando en nuevas ideas: API REST con FastAPI, aplicación móvil con React Native y sistema de análisis de datos con Machine Learning.</p>
+                            <div class="project-achievements">
+                                <span class="achievement">🔮 En desarrollo</span>
+                                <span class="achievement">📱 Móvil</span>
+                                <span class="achievement">🤖 ML</span>
+                            </div>
+                            <div class="project-tech">FastAPI • React Native • Scikit-learn • TensorFlow</div>
+                            <button class="xp-button" disabled>Próximamente</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ventana de Videojuegos -->
+        <div class="window" id="games-window">
+            <div class="window-header">
+                <div class="window-title">🎮 Centro de Juegos</div>
+                <div class="window-controls">
+                    <button class="control minimize"></button>
+                    <button class="control maximize"></button>
+                    <button class="control close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="window-content">
+                    <h2>🎮 Mini-Juegos Interactivos</h2>
+                    <p>¡Demuestra mis habilidades de programación mientras te diviertes! Cada juego está desarrollado en JavaScript vanilla.</p>
+                    
+                    <div class="games-container">
+                        <div class="game-card" id="snake-game-card">
+                            <div class="game-icon">🐍</div>
+                            <h3>Snake Game</h3>
+                            <p>El clásico juego de la serpiente. ¡Recoge comida y crece sin chocar contigo mismo!</p>
+                            <div class="game-score">Best Score: <span id="snake-best">0</span></div>
+                            <button class="xp-button play-game" data-game="snake">Jugar Snake</button>
+                        </div>
+                        
+                        <div class="game-card" id="memory-game-card">
+                            <div class="game-icon">🧠</div>
+                            <h3>Memory Game</h3>
+                            <p>Pon a prueba tu memoria con este juego de cartas. ¡Encuentra todas las parejas!</p>
+                            <div class="game-score">Best Time: <span id="memory-best">--:--</span></div>
+                            <button class="xp-button play-game" data-game="memory">Jugar Memory</button>
+                        </div>
+                        
+                        <div class="game-card" id="tetris-game-card">
+                            <div class="game-icon">🟦</div>
+                            <h3>Tetris Clone</h3>
+                            <p>El famoso juego de bloques. ¡Completa líneas y alcanza la puntuación más alta!</p>
+                            <div class="game-score">Best Score: <span id="tetris-best">0</span></div>
+                            <button class="xp-button play-game" data-game="tetris">Jugar Tetris</button>
+                        </div>
+                        
+                        <div class="game-card" id="pong-game-card">
+                            <div class="game-icon">🏓</div>
+                            <h3>Pong</h3>
+                            <p>El primer videojuego de la historia. ¡Compite contra la IA!</p>
+                            <div class="game-score">Best Score: <span id="pong-best">0</span></div>
+                            <button class="xp-button play-game" data-game="pong">Jugar Pong</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Game Canvas Container -->
+                    <div class="game-canvas-container" id="game-canvas-container" style="display: none;">
+                        <div class="game-header">
+                            <h3 id="current-game-title">Juego</h3>
+                            <div class="game-controls">
+                                <span id="current-score">Score: 0</span>
+                                <button class="xp-button" id="pause-game">Pause</button>
+                                <button class="xp-button" id="close-game">Cerrar</button>
+                            </div>
+                        </div>
+                        <canvas id="game-canvas" width="400" height="400"></canvas>
+                        <div class="game-instructions" id="game-instructions">
+                            <p>Usa las teclas de flecha para moverte</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ventana de Fotos -->
+        <div class="window" id="photos-window">
+            <div class="window-header">
+                <div class="window-title">📸 Galería Personal</div>
+                <div class="window-controls">
+                    <button class="control minimize"></button>
+                    <button class="control maximize"></button>
+                    <button class="control close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="window-content">
+                    <h2>📸 Un poco sobre mi vida</h2>
+                    <p>Conoce más sobre mí a través de estas fotos personales y profesionales.</p>
+                    
+                    <div class="photo-gallery">
+                        <div class="photo-category">
+                            <h3>👨‍💻 Profesional</h3>
+                            <div class="photo-grid">
+                                <div class="photo-item" data-photo="professional-1">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=face" alt="En Adidas Colombia" loading="lazy">
+                                    <div class="photo-overlay">
+                                        <p>En Adidas Colombia</p>
+                                    </div>
+                                </div>
+                                <div class="photo-item" data-photo="professional-2">
+                                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop" alt="Programando" loading="lazy">
+                                    <div class="photo-overlay">
+                                        <p>Programando</p>
+                                    </div>
+                                </div>
+                                <div class="photo-item" data-photo="professional-3">
+                                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop" alt="Workspace" loading="lazy">
+                                    <div class="photo-overlay">
+                                        <p>Workspace</p>
+                                    </div>
+                                </div>
+                                <div class="photo-item" data-photo="professional-4">
+                                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop" alt="Team Collaboration" loading="lazy">
+                                    <div class="photo-overlay">
+                                        <p>Team Collaboration</p>
+                                    </div>
+                                </div>
+                                <div class="photo-item" data-photo="professional-5">
+                                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=300&fit=crop" alt="Code Review" loading="lazy">
+                                    <div class="photo-overlay">
+                                        <p>Code Review</p>
+                                    </div>
+                                </div>
+                                <div class="photo-item" data-photo="professional-6">
+                                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400&h=300&fit=crop" alt="Innovation Lab" loading="lazy">
+                                    <div class="photo-overlay">
+                                        <p>Innovation Lab</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="photo-category">
+                            <h3>🎯 Pasatiempos</h3>
+                            <div class="photo-grid">
+                                <div class="photo-item" data-photo="hobby-1">
+                                    <div class="photo-placeholder">
+                                        <span>🎮</span>
+                                        <p>Gaming</p>
+                                    </div>
+                                </div>
+                                <div class="photo-item" data-photo="hobby-2">
+                                    <div class="photo-placeholder">
+                                        <span>📚</span>
+                                        <p>Leyendo</p>
+                                    </div>
+                                </div>
+                                <div class="photo-item" data-photo="hobby-3">
+                                    <div class="photo-placeholder">
+                                        <span>🏃‍♂️</span>
+                                        <p>Ejercicio</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="photo-category">
+                            <h3>🌍 Viajes</h3>
+                            <div class="photo-grid">
+                                <div class="photo-item" data-photo="travel-1">
+                                    <div class="photo-placeholder">
+                                        <span>🏔️</span>
+                                        <p>Bogotá</p>
+                                    </div>
+                                </div>
+                                <div class="photo-item" data-photo="travel-2">
+                                    <div class="photo-placeholder">
+                                        <span>🌊</span>
+                                        <p>Costa Colombiana</p>
+                                    </div>
+                                </div>
+                                <div class="photo-item" data-photo="travel-3">
+                                    <div class="photo-placeholder">
+                                        <span>🌳</span>
+                                        <p>Naturaleza</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Photo Modal -->
+                    <div class="photo-modal" id="photo-modal" style="display: none;">
+                        <div class="photo-modal-content">
+                            <span class="photo-modal-close">&times;</span>
+                            <img id="modal-photo" src="" alt="">
+                            <div class="photo-modal-caption">
+                                <h3 id="modal-title">Título</h3>
+                                <p id="modal-description">Descripción</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -215,35 +553,113 @@
             </div>
             <div class="window-body">
                 <div class="window-content">
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <label for="name">Nombre:</label>
-                            <input type="text" id="name" class="xp-input" required>
-                        </div>
+                    <h2>📧 ¡Contactemos!</h2>
+                    <p>¿Tienes una idea interesante o quieres trabajar conmigo? ¡Me encantaría escucharte!</p>
+                    
+                    <div class="contact-tabs">
+                        <button class="contact-tab active" data-tab="form">📝 Enviar Mensaje</button>
+                        <button class="contact-tab" data-tab="info">📞 Información</button>
+                    </div>
+                    
+                    <div class="contact-content">
+                        <div class="contact-tab-content active" id="form-tab">
+                            <form id="contact-form">
+                                <div class="form-group">
+                                    <label for="name">👤 Nombre:</label>
+                                    <input type="text" id="name" name="from_name" class="xp-input" placeholder="Tu nombre completo" required>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" class="xp-input" required>
-                        </div>
+                                <div class="form-group">
+                                    <label for="email">📧 Email:</label>
+                                    <input type="email" id="email" name="from_email" class="xp-input" placeholder="tu@email.com" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="company">🏢 Empresa/Proyecto (opcional):</label>
+                                    <input type="text" id="company" name="company" class="xp-input" placeholder="Tu empresa o proyecto">
+                                </div>
 
-                        <div class="form-group">
-                            <label for="message">Mensaje:</label>
-                            <textarea id="message" class="xp-textarea" rows="5" required></textarea>
-                        </div>
+                                <div class="form-group">
+                                    <label for="subject">📋 Asunto:</label>
+                                    <select id="subject" name="subject" class="xp-input" required>
+                                        <option value="">Selecciona un asunto</option>
+                                        <option value="Oportunidad de trabajo">💼 Oportunidad de trabajo</option>
+                                        <option value="Colaboración en proyecto">🤝 Colaboración en proyecto</option>
+                                        <option value="Consulta técnica">💻 Consulta técnica</option>
+                                        <option value="Freelance">💡 Proyecto freelance</option>
+                                        <option value="Otros">💬 Otros</option>
+                                    </select>
+                                </div>
 
-                        <button type="submit" class="xp-button">Enviar Mensaje</button>
-                    </form>
+                                <div class="form-group">
+                                    <label for="message">💬 Mensaje:</label>
+                                    <textarea id="message" name="message" class="xp-textarea" rows="6" 
+                                             placeholder="Cuéntame sobre tu proyecto, idea o oportunidad..." required></textarea>
+                                </div>
 
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <span class="contact-label">Email:</span>
-                            <a href="mailto:juan.juand.dev@gmail.com">juan.juand.dev@gmail.com</a>
+                                <div class="form-status" id="form-status"></div>
+                                
+                                <button type="submit" class="xp-button submit-btn" id="submit-btn">
+                                    <span class="btn-text">🚀 Enviar Mensaje</span>
+                                    <span class="btn-loader" style="display: none;">📤 Enviando...</span>
+                                </button>
+                            </form>
                         </div>
-                        <div class="contact-item">
-                            <span class="contact-label">LinkedIn:</span>
-                            <a href="www.linkedin.com/in/juan-david-mahecha-sabogal"
-                                target="_blank">linkedin.com/in/juan-david</a>
+                        
+                        <div class="contact-tab-content" id="info-tab">
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <div class="contact-icon">📧</div>
+                                    <div class="contact-details">
+                                        <span class="contact-label">Email:</span>
+                                        <a href="mailto:juan.juand.dev@gmail.com">juan.juand.dev@gmail.com</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">💼</div>
+                                    <div class="contact-details">
+                                        <span class="contact-label">LinkedIn:</span>
+                                        <a href="https://www.linkedin.com/in/juan-david-mahecha-sabogal" target="_blank">
+                                            linkedin.com/in/juan-david-mahecha-sabogal
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">💻</div>
+                                    <div class="contact-details">
+                                        <span class="contact-label">GitHub:</span>
+                                        <a href="https://github.com/SoliDeoGloria123" target="_blank">
+                                            github.com/SoliDeoGloria123
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">📱</div>
+                                    <div class="contact-details">
+                                        <span class="contact-label">Teléfono:</span>
+                                        <span>+57 311 502 44 30</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">📍</div>
+                                    <div class="contact-details">
+                                        <span class="contact-label">Ubicación:</span>
+                                        <span>Bogotá, Colombia</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="availability-status">
+                                    <h3>🟢 Estado: Disponible</h3>
+                                    <p>Actualmente abierto a nuevas oportunidades laborales y proyectos freelance.</p>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
                         <div class="contact-item">
                             <span class="contact-label">GitHub:</span>
                             <a href="https://github.com/SoliDeoGloria123"
@@ -325,9 +741,15 @@
                 </div>
 
                 <div class="resume-download">
-                    <a href="assets/doc/CV_JUAN_DAVID_MAHECHA_SABOGAL (2) (2).pdf" class="xp-button"
-                        onclick="alert('CV completo disponible bajo petición');">Descargar
-                        CV completo (PDF)</a>
+                    <a href="assets/doc/CV_JUAN_DAVID_MAHECHA_SABOGAL (2) (2).pdf" 
+                       class="xp-button" 
+                       download="CV_Juan_David_Mahecha_Sabogal.pdf"
+                       id="download-cv-btn">
+                        📄 Descargar CV completo (PDF)
+                    </a>
+                    <p style="margin-top: 10px; font-size: 12px; color: #666;">
+                        💼 Versión completa con experiencia detallada y referencias
+                    </p>
                 </div>
             </div>
         </div>
@@ -348,6 +770,14 @@
                 <img src="assets/images/icons/my-documents.png" alt="">
                 <span>Proyectos</span>
             </div>
+            <div class="start-menu-item" data-window="games-window">
+                <img src="assets/images/icons/my-computer.png" alt="">
+                <span>🎮 Juegos</span>
+            </div>
+            <div class="start-menu-item" data-window="photos-window">
+                <img src="assets/images/icons/my-documents.png" alt="">
+                <span>📸 Fotos</span>
+            </div>
             <div class="start-menu-item" data-window="contact-window">
                 <img src="assets/images/icons/outlook.png" alt="">
                 <span>Contacto</span>
@@ -363,15 +793,15 @@
             </div>
         </div>
         <div class="start-menu-right">
-            <div class="start-menu-right-item">
+            <div class="start-menu-right-item" id="github-link">
                 <img src="assets/images/icons/github.png" alt="">
                 <span>GitHub</span>
             </div>
-            <div class="start-menu-right-item">
+            <div class="start-menu-right-item" id="linkedin-link">
                 <img src="assets/images/icons/linkedin.png" alt="">
                 <span>LinkedIn</span>
             </div>
-            <div class="start-menu-right-item">
+            <div class="start-menu-right-item" id="email-link">
                 <!-- https://www.flaticon.com/free-icon/gmail_5968534?term=gmail&page=1&position=4&origin=tag&related_id=5968534 -->
                 <img src="assets/images/icons/gmail.png" alt="">
                 <span>Email</span>
@@ -390,17 +820,27 @@
             <!-- Aquí se añadirán dinámicamente las ventanas abiertas -->
         </div>
         <div class="system-tray">
+            <button id="sound-toggle" class="sound-toggle" title="Activar/Desactivar sonidos">
+                🔊
+            </button>
             <div class="time" id="system-time">15:45</div>
         </div>
     </div>
 
     <!-- Scripts -->
-    <!-- Scripts -->
+    <!-- EmailJS CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- EmailJS Configuration -->
+    <script src="js/emailjs-config.js"></script>
+    
     <script src="js/terrain-background.js"></script>
+    <script src="js/gamification.js"></script>
     <script src="js/main.js"></script>
     <script src="js/tutorial.js"></script>
     <script src="js/music-player.js"></script>
     <script src="js/menu-fix.js"></script>
+    <script src="js/games-and-contact.js"></script>
 </body>
 
 </html>

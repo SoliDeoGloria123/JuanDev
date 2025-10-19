@@ -2,7 +2,28 @@
 
 /* Ventana "Sobre Mí" */
 #about-window {
+/* Ventana "Currículum" */
+#resume-window {
+    box-shadow: 0 5px 25px rgba(255, 140, 0, 0.5);
+    max-height: 90vh;
+}
+
+#resume-window .window-header {
+    background: linear-gradient(to right, #ff8c00, #ffa500);
+}
+
+#resume-window .window-content {
+    background: #fffaf5;
+    border-color: #ff8c00;
+    height: auto;
+    max-height: calc(90vh - 100px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#about-window {
     box-shadow: 0 5px 25px rgba(0, 120, 212, 0.5);
+    max-height: 90vh;
 }
 
 #about-window .window-header {
@@ -12,6 +33,16 @@
 #about-window .window-content {
     background: #f5f9ff;
     border-color: #0078d4;
+    height: auto;
+    max-height: calc(90vh - 100px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+#about-window .window-body {
+    height: calc(100% - 30px);
+    overflow: hidden;
 }
 
 #about-window .skill-level {
@@ -21,6 +52,7 @@
 /* Ventana "Proyectos" */
 #projects-window {
     box-shadow: 0 5px 25px rgba(126, 49, 180, 0.5);
+    max-height: 90vh;
 }
 
 #projects-window .window-header {
@@ -30,6 +62,10 @@
 #projects-window .window-content {
     background: #faf5ff;
     border-color: #7e31b4;
+    height: auto;
+    max-height: calc(90vh - 100px);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .project-card {
@@ -45,6 +81,7 @@
 /* Ventana "Contacto" */
 #contact-window {
     box-shadow: 0 5px 25px rgba(16, 137, 62, 0.5);
+    max-height: 90vh;
 }
 
 #contact-window .window-header {
@@ -54,6 +91,10 @@
 #contact-window .window-content {
     background: #f5fff9;
     border-color: #10893e;
+    height: auto;
+    max-height: calc(90vh - 100px);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #contact-window .xp-button {
@@ -149,7 +190,7 @@
     content: '';
     width: 16px;
     height: 16px;
-    background-image: url('assets/images/icons/bullet.png');
+    background-image: url('../assets/images/icons/bullet.png');
     background-size: contain;
     position: absolute;
     left: 0;
@@ -163,4 +204,28 @@
     margin-top: 20px;
     padding-top: 15px;
     border-top: 1px solid #e0e0e0;
+}
+
+/* Ventana "Juegos" */
+#games-window {
+    max-height: 90vh;
+}
+
+#games-window .window-content {
+    height: auto;
+    max-height: calc(90vh - 100px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Ventana "Fotos" */
+#photos-window {
+    max-height: 90vh;
+}
+
+#photos-window .window-content {
+    height: auto;
+    max-height: calc(90vh - 100px);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
